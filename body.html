@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUTI MENU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .sponsors {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .sponsor {
+            text-align: center;
+        }
+        .sponsor img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        .sponsor a {
+            display: block;
+            color: #4CAF50;
+            margin-top: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .sponsor a:hover {
+            text-decoration: underline;
+        }
+        /* เมนูด้านขวา */
+        .menu {
+            position: fixed;
+            right: -220px;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            background-color: #222;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            display: block;
+            transition: background 0.3s;
+        }
+        .menu a:hover {
+            background-color: #444;
+        }
+        .menu-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            width: 40px;
+            height: 80px;
+            background-color: #444;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transform: translateY(-50%);
+            border-radius: 10px 0 0 10px;
+        }
+        .menu-container:hover .menu {
+            right: 0;
+        }
+        /* หิมะตก */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            opacity: 0.8;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0px); opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="message">ใช้งานเว็บไซต์ทางขวาได้เลย</div>
+</div>
+
+<!-- เมนูด้านขวา -->
+<div class="menu-container">
+    <div class="menu">
+        <a href="body.html"> หน้าแรก</a>
+        <a href="inlogin.html"> ตรวจสอบเบอร์</a> <!-- ลิงก์นี้จะไปที่หน้า login.html ก่อน -->
+        <a href="login.html"> เช็คผู้เล่นFIVEM RP</a>
+        <a href="fivemtn.html"> เช็คผู้เล่นFIVEM TN</a>
+        <a href="singup.html">ออกจากระบบ</a>
+    </div>
+    <div class="menu-toggle">➡️</div>
+</div>
+
+<!-- ส่วนของผู้สนับสนุน -->
+<div class="sponsors">
+    <div class="sponsor">
+        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929005146869780/337034508_3341823326071723_9123946919201835390_n.jpg?ex=67d13f88&is=67cfee08&hm=f46285a9fb67f596680b58238f99d685e975dd18cf9ebd83ad7bcd35abde2c0a&=&format=webp&width=978&height=978" alt="ผู้สนับสนุน 1">
+        <a href="https://www.facebook.com/botts3thai" target="_blank">Carbon bot By Ts3thai</a>
+    </div>
+    <div class="sponsor">
+        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929013556449310/456245451_1838006599942872_406197541927547336_n.png?ex=67d13f8a&is=67cfee0a&hm=2dd17ae075d1f66b5af35c7e95072375de111b069acd9c343dfade810cb259f4&=&format=webp&quality=lossless" alt="ผู้สนับสนุน 2">
+        <a href="https://www.facebook.com/ts3thais" target="_blank">TS3THAI.NET</a>
+    </div>
+    <div class="sponsor">
+        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929028329046016/337502772_613008317509653_8814670326412185626_n.jpg?ex=67d13f8e&is=67cfee0e&hm=04562f0cf1a34746ec28846d8a95fbbcaef8ca63cdd8fe8f17e2a7bf84bfbd07&=&format=webp&width=978&height=978" alt="ผู้สนับสนุน 3">
+        <a href="https://www.facebook.com/Nisitcloudcompanylimited" target="_blank">Nisitcloud</a>
+    </div>
+</div>
+
+<!-- JavaScript หิมะตก -->
+<script>
+    function createSnowflake() {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.innerHTML = "❄";
+        document.body.appendChild(snowflake);
+
+        let size = Math.random() * 20 + 5;
+        let left = Math.random() * window.innerWidth;
+        let duration = Math.random() * 5 + 3;
+
+        snowflake.style.left = left + "px";
+        snowflake.style.fontSize = size + "px";
+        snowflake.style.animationDuration = duration + "s";
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, duration * 1000);
+    }
+
+    setInterval(createSnowflake, 300);
+</script>
+
+</body>
+</html>

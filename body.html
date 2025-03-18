@@ -5,173 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JUTI MENU</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: white;
-            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
             overflow: hidden;
+            animation: gradientBG 10s ease infinite, flicker 1.5s infinite alternate;
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes flicker {
+            0% { background: rgba(59, 59, 59, 0.7); }
+            50% { background: rgb(90, 90, 90); }
+            100% { background: rgba(0, 0, 0, 0.7); }
+        }
+
+        /* Parallax Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('your-image.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            animation: parallax 20s linear infinite;
+        }
+
+        @keyframes parallax {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #000000, #838383);
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            z-index: 1000;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .navbar a::before {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #00ffff;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Hover effect for Navbar */
+        .navbar a:hover {
+            transform: rotateY(10deg) translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.8), 0 0 25px rgba(0, 255, 255, 0.5);
+            color: #00ffff;
+        }
+
+        .navbar a:hover::before {
+            width: 100%;
+        }
+
+        /* Container styles */
         .container {
-            background-color: #333;
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0, 198, 255, 0.8);
             max-width: 500px;
             width: 100%;
-            margin-bottom: 20px;
-        }
-        .message {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .sponsors {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .sponsor {
             text-align: center;
+            animation: fadeIn 1s ease-in-out, pulse 3s infinite alternate, glowBorder 4s infinite alternate, neonGlow 5s infinite alternate;
         }
-        .sponsor img {
-            width: 120px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-        .sponsor a {
-            display: block;
-            color: #4CAF50;
-            margin-top: 5px;
-            text-decoration: none;
+
+        .message {
+            font-size: 2.5em;
             font-weight: bold;
+            margin-bottom: 15px;
+            color: #00c6ff;
+            text-shadow: 0 0 15px #00c6ff, 0 0 25px #0072ff;
+            letter-spacing: 2px;
+            animation: textGlow 2s infinite alternate, bounceIn 2s ease-out;
         }
-        .sponsor a:hover {
-            text-decoration: underline;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* เมนูด้านขวา */
-        .menu {
-            position: fixed;
-            right: -220px;
-            top: 0;
-            width: 200px;
-            height: 100vh;
-            background-color: #222;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            z-index: 1000;
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
-        .menu a {
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            display: block;
-            transition: background 0.3s;
+
+        @keyframes pulse {
+            from { transform: scale(1); box-shadow: 0 0 40px rgba(0, 198, 255, 0.8); }
+            to { transform: scale(1.05); box-shadow: 0 0 60px rgba(0, 198, 255, 1); }
         }
-        .menu a:hover {
-            background-color: #444;
+
+        @keyframes glowBorder {
+            from { border: 3px solid #00c6ff; }
+            to { border: 3px solid #0072ff; }
         }
-        .menu-toggle {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            width: 40px;
-            height: 80px;
-            background-color: #444;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        @keyframes neonGlow {
+            from { box-shadow: 0 0 40px #00c6ff; }
+            to { box-shadow: 0 0 60px #00ffff; }
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px #00c6ff; }
+            to { text-shadow: 0 0 20px #00ffff, 0 0 30px #0072ff; }
+        }
+
+        /* Bouncing effect for message */
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .container:hover {
+            box-shadow: 0 0 100px rgba(0, 198, 255, 1), 0 0 50px rgba(0, 198, 255, 0.8);
+            transform: scale(1.15) rotate(-3deg);
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Button with glowing border */
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: transparent;
+            border: 2px solid #00c6ff;
+            color: #fff;
+            border-radius: 5px;
             cursor: pointer;
-            transform: translateY(-50%);
-            border-radius: 10px 0 0 10px;
+            transition: 0.4s;
+            position: relative;
         }
-        .menu-container:hover .menu {
-            right: 0;
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00c6ff;
+            border-radius: 5px;
+            z-index: -1;
+            transition: all 0.4s;
+            transform: scaleX(0);
+            transform-origin: right;
         }
-        /* หิมะตก */
-        .snowflake {
+
+        .button:hover {
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 198, 255, 1);
+        }
+
+        .button:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* ดาวตก */
+        .star {
             position: fixed;
             top: -10px;
-            color: white;
-            opacity: 0.8;
+            color: #000000;
+            opacity: 0.9;
             user-select: none;
             pointer-events: none;
             animation: fall linear infinite;
+            z-index: 1000;
         }
+
         @keyframes fall {
-            0% { transform: translateY(0px); opacity: 0.8; }
-            100% { transform: translateY(100vh); opacity: 0; }
+            0% { transform: translateY(0px) rotate(0); opacity: 0.9; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="message">ใช้งานเว็บไซต์ทางขวาได้เลย</div>
-</div>
+    <!-- Parallax Background -->
+    <div class="background"></div>
 
-<!-- เมนูด้านขวา -->
-<div class="menu-container">
-    <div class="menu">
-        <a href="body.html"> หน้าแรก</a>
-        <a href="inlogin.html"> ตรวจสอบเบอร์</a> <!-- ลิงก์นี้จะไปที่หน้า login.html ก่อน -->
-        <a href="login.html"> เช็คผู้เล่นFIVEM RP</a>
-        <a href="fivemtn.html"> เช็คผู้เล่นFIVEM TN</a>
-        <a href="index.html">ออกจากระบบ</a>
+    <div class="navbar">
+        <a href="body.html">หน้าแรก</a>
+        <a href="pn.html">พาร์ทเนอร์</a>
+        <a href="inlogin.html">ตรวจสอบเบอร์</a>
+        <a href="rp.html">เช็คผู้เล่นFIVEM RP</a>
+        <a href="tn.html">เช็คผู้เล่นFIVEM TN</a>
+        <a href="https://www.facebook.com/lakksjslal.ksksiksks">แจ้งปัญหาด่วน</a>
+        <a href="singup.html">ออกจากระบบ</a>
     </div>
-    <div class="menu-toggle">➡️</div>
-</div>
 
-<!-- ส่วนของผู้สนับสนุน -->
-<div class="sponsors">
-    <div class="sponsor">
-        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929005146869780/337034508_3341823326071723_9123946919201835390_n.jpg?ex=67d13f88&is=67cfee08&hm=f46285a9fb67f596680b58238f99d685e975dd18cf9ebd83ad7bcd35abde2c0a&=&format=webp&width=978&height=978" alt="ผู้สนับสนุน 1">
-        <a href="https://www.facebook.com/botts3thai" target="_blank">Carbon bot By Ts3thai</a>
+    <div class="container">
+        <div class="message">เว็บไซต์ส่วนบุคคล</div>
+        <div class="messages">JUTI STORY x YOUNGBXY</div>
     </div>
-    <div class="sponsor">
-        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929013556449310/456245451_1838006599942872_406197541927547336_n.png?ex=67d13f8a&is=67cfee0a&hm=2dd17ae075d1f66b5af35c7e95072375de111b069acd9c343dfade810cb259f4&=&format=webp&quality=lossless" alt="ผู้สนับสนุน 2">
-        <a href="https://www.facebook.com/ts3thais" target="_blank">TS3THAI.NET</a>
-    </div>
-    <div class="sponsor">
-        <img src="https://media.discordapp.net/attachments/1309517132161351782/1348929028329046016/337502772_613008317509653_8814670326412185626_n.jpg?ex=67d13f8e&is=67cfee0e&hm=04562f0cf1a34746ec28846d8a95fbbcaef8ca63cdd8fe8f17e2a7bf84bfbd07&=&format=webp&width=978&height=978" alt="ผู้สนับสนุน 3">
-        <a href="https://www.facebook.com/Nisitcloudcompanylimited" target="_blank">Nisitcloud</a>
-    </div>
-</div>
 
-<!-- JavaScript หิมะตก -->
-<script>
-    function createSnowflake() {
-        const snowflake = document.createElement("div");
-        snowflake.classList.add("snowflake");
-        snowflake.innerHTML = "❄";
-        document.body.appendChild(snowflake);
+    <style>
+        .messages {
+            font-size: 12px; /* ปรับขนาดตัวหนังสือให้เล็กลง */
+            color: #ffffff; /* เปลี่ยนสีตัวหนังสือ (เลือกตามใจชอบได้เลย) */
+        }
+    
+        .container {
+            text-align: center; /* จัดให้อยู่ตรงกลาง */
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            star.innerHTML = "★";  /* ดาว */
+            document.body.appendChild(star);
 
-        let size = Math.random() * 20 + 5;
-        let left = Math.random() * window.innerWidth;
-        let duration = Math.random() * 5 + 3;
+            let size = Math.random() * 10 + 5;
+            let left = Math.random() * window.innerWidth;
+            let duration = Math.random() * 5 + 3;
 
-        snowflake.style.left = left + "px";
-        snowflake.style.fontSize = size + "px";
-        snowflake.style.animationDuration = duration + "s";
+            star.style.left = `${left}px`;
+            star.style.fontSize = `${size}px`;
+            star.style.animationDuration = `${duration}s`;
 
-        setTimeout(() => {
-            snowflake.remove();
-        }, duration * 1000);
-    }
+            setTimeout(() => {
+                star.remove();
+            }, duration * 1000);
+        }
 
-    setInterval(createSnowflake, 300);
-</script>
+        setInterval(createStar, 300);
+    </script>
 
 </body>
 </html>
